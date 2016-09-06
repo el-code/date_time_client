@@ -10,9 +10,9 @@ int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    if(argc < 2)
+    if(argc < 3)
     {
-        std::cout << "Usage: date_time_client <IpAddress>" << std::endl;
+        std::cout << "Usage: date_time_client <IpAddress> <Port>" << std::endl;
         return 1;
     }
 
@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 
     bzero(&sock_addr, sizeof(sockaddr_in));
     sock_addr.sin_family = AF_INET;
-    sock_addr.sin_port = htons(13);
+    sock_addr.sin_port = htons(atoi(argv[2]));
 
     if(inet_pton(AF_INET, argv[1], &sock_addr.sin_addr) <= 0)
     {
